@@ -1,0 +1,23 @@
+callback hell situation is created when multiple callback function nested to each other. 
+That creates problems to reading the code 
+here is an example of callback hell:
+
+asyncFunc1((err, result1) => {
+  if (err) {
+    console.error('Error:', err);
+  } else {
+    asyncFunc2((err, result2) => {
+      if (err) {
+        console.error('Error:', err);
+      } else {
+        asyncFunc3((err, result3) => {
+          if (err) {
+            console.error('Error:', err);
+          } else {
+            // ... more nested callbacks ...
+          }
+        });
+      }
+    });
+  }
+});

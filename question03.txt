@@ -1,0 +1,61 @@
+console.log('Start')
+setTimeout(()=>{
+    console.log("timeout")
+}, 0)
+
+const promise1 = new Promise((resolve, reject) =>{
+    setTimeout(()=>{
+        resolve("Promise 1 resolved")
+    }, 1000)
+});
+const promise2 = new Promise((resolve, reject) =>{
+    setTimeout(()=>{
+        resolve("Promise 2 resolved")
+    }, 2000)
+});
+const promise3 = new Promise((resolve, reject) =>{
+    setTimeout(()=>{
+        resolve("Promise 3 resolved")
+    }, 0)
+});
+
+promise1.then((result) => console.log(result));
+promise2.then((result) => console.log(result));
+promise3.then((result) => console.log(result));
+
+console.log("End")
+
+--------------------------------------------------
+output-
+----------
+Start
+End
+timeout
+Promise 3 resolved
+Promise 1 resolved
+Promise 2 resolved
+
+ console.log('start') -> start executed first which print "start"
+
+ setTimeout(()=>{
+    console.log("timeout")
+}, 0)
+
+The setTimeout function is called with a delay of 0 milliseconds. However, 
+due to JavaScript's event loop mechanism, the callback function inside setTimeout will be executed after the current call stack is empty. So, "timeout" is not immediately printed.
+
+
+Three promises (promise1, promise2, promise3) are created with their respective setTimeout functions inside. 
+These promises will resolve after the specified delay,
+first will console promise3 then promise1 then promise2
+
+
+
+The promise1.then function attaches a callback to execute when promise1 is resolved. 
+This callback logs "Promise 1 resolved". Similarly, the promise2.then and promise3.then functions attach callbacks for their respective promises.
+
+The console.log("end") statement is executed, printing "end" to the console.
+
+As the call stack becomes empty, the event loop starts processing the queued tasks. The "timeout" message is printed to the console, indicating the execution of the callback function specified in the setTimeout with a delay of 0 milliseconds.
+
+The promises start resolving after their respective delays. Due to the delays specified, "Promise 3 resolved" is printed first, followed by "Promise 1 resolved" after 1 second, and finally "Promise 2 resolved" after 2 seconds.

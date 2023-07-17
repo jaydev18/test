@@ -1,0 +1,21 @@
+There are some common techniques for handling errors in Node.js and Express.js applications
+
+- using try and chatch block 
+try {
+  // Synchronous code that may throw an error
+} catch (err) {
+  // Handle the error
+}
+
+- Error Middleware
+
+Create error-handling middleware functions in Express.js to handle 
+errors specifically. This middleware should be defined after all other middleware and
+routes. It should have four parameters: (err, req, res, next). 
+By defining this middleware, you can handle errors and send appropriate responses 
+or perform necessary actions.
+
+app.use(function(err, req, res, next) {
+  // Handle the error and send an appropriate response
+  res.status(500).json({ error: 'Something went wrong' });
+});
